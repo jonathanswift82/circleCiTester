@@ -1,2 +1,0 @@
-# circleCiTester
-for testing CircleCi

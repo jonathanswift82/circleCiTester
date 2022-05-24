@@ -1,0 +1,36 @@
+version: 2.1
+​
+jobs:
+  update-jira-statuses:
+    docker:
+      - image: circleci/python:3.8.3
+    parameters:
+      jira_user:
+        type: string
+      jira_api_token:
+        type: string
+      jira_server_url:
+        type: string
+      github_api_token:
+        type: string
+      github_project:
+        type: string          
+    steps:
+      - run: echo << parameters.userProd >>
+          name:
+          command: |
+            cd ~/project/.circleci/scripts/
+            pip3 install PyGithub
+            pip3 install PyGithub
+            pip3 install 
+            python3 jira_test.py $DD_API_KEY $DD_APPLICATION_KEY << parameters.dd-env >>
+​
+workflows:
+  my-workflow:
+    jobs:
+      - update-jira-statuses:
+          jira_user: jonathanswift82@gmail.com
+          jira_api_token: 2R4
+          jira_server_url: https://jiracircleciintegration.atlassian.net
+          github_api_token: ghp_
+          github_project: circleCiTester
