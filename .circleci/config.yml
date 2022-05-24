@@ -17,6 +17,12 @@ jobs:
         type: string          
     steps:
       - run: echo << parameters.userProd >>
+          name:
+          command: |
+            cd ~/project/.circleci/scripts/
+            pip3 install PyGithub
+            pip3 install PyGithub
+            python3 monitor_check.py $DD_API_KEY $DD_APPLICATION_KEY << parameters.dd-env >>
 ​
 workflows:
   my-workflow:
