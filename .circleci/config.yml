@@ -16,6 +16,7 @@ jobs:
             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       steps:
         - run:
+            name: Jira status update
             |
             echo "test1"
             cd ~/project/.circleci/scripts/
