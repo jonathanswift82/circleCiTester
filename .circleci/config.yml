@@ -1,37 +1,28 @@
 version: 2.1
-​
+executors:
+  my-custom-executor:
+    docker:
+      - image: cimg/python:3.10.4
+        auth:
+          # ensure you have first added these secrets
+          # visit app.circleci.com/settings/project/github/jonathanswift82/circleCiTester/environment-variables
+          username: $DOCKER_HUB_USER
+          password: $DOCKER_HUB_PASSWORD
 jobs:
   update-jira-statuses:
-    docker:
-      - image: circleci/python:3.8.3
-    parameters:
+    environment:
       jira_user: $jira_user
-        type: string
-      jira_api_token: $jira_api_token
-        type: string
-      jira_server_url: $jira_server_url
-        type: string
-      github_api_token: $github_api_token
-        type: string
+      jira_apikey: $jira_apikey
+      jira_server_URL: $jira_server_URL
+      github_Token: $github_Token
       github_project: $github_project
-        type: string          
+    executor: my-custom-executor
     steps:
-      - run: echo << parameters.userProd >>
-          name: jira_status_update
-          command: |
-            cd ~/project/.circleci/scripts/
-            pip3 install PyGithub
-            pip3 install jira
-            pip3 install python-dotenv
-            echo << parameters.jira_user >> << parameters.jira_api_token >> << parameters.jira_server_url >> << parameters.github_api_token >> << parameters.github_project >>
-            python3 jira_test.py $DD_API_KEY $DD_APPLICATION_KEY << parameters.jira_user >>
-​
+      - checkout
+      - run: |
+          # echo <parameter.jira_user> $jira_user!
+
 workflows:
-  workflow-update-jira-statuses:
+  my-custom-workflow:
     jobs:
-      - update-jira-statuses:
-          jira_user: $jira_user
-          jira_api_token: $jira_api_token
-          jira_server_url: $jira_server_url
-          github_api_token: $github_api_token
-          github_project: $github_api_token
+      - update-jira-statuses
