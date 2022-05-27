@@ -15,12 +15,12 @@ jobs:
             username: mydockerhub-user
             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       steps:
-        - run: echo "test"
+        - run: echo "test1"
             cd ~/project/.circleci/scripts/
             pip3 install PyGithub
             pip3 install jira
             pip3 install python-dotenv
-            python3 jira_test.py ${jira_user} ${jira_api_token} ${jira_server_url} ${github_api_token} ${github_project}
+            python3 jira_test.py $jira_user ${ira_api_token $jira_server_url $github_api_token $github_project
 
 
 # Orchestrate our job run sequence
