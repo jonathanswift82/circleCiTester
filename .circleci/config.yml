@@ -1,28 +1,18 @@
 version: 2.1
-executors:
-  my-custom-executor:
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
     docker:
       - image: cimg/python:3.10.4
         auth:
-          # ensure you have first added these secrets
-          # visit app.circleci.com/settings/project/github/jonathanswift82/circleCiTester/environment-variables
-          username: $DOCKER_HUB_USER
-          password: $DOCKER_HUB_PASSWORD
-jobs:
-  update-jira-statuses:
-    environment:
-      jira_user: $jira_user
-      jira_apikey: $jira_apikey
-      jira_server_URL: $jira_server_URL
-      github_Token: $github_Token
-      github_project: $github_project
-    executor: my-custom-executor
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - checkout
-      - run: |
-          # echo <parameter.jira_user> $jira_user!
+      - run: echo $jira_user $jira_api_token $jira_server_url $github_api_token $github_project
 
+# Orchestrate our job run sequence
 workflows:
-  my-custom-workflow:
+  build_and_test:
     jobs:
-      - update-jira-statuses
+      - build
