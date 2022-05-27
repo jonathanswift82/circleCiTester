@@ -26,7 +26,7 @@ def github_PRs(gitToken, gitproject):
     return issues
 
 def jira_change_status(jira_user,jira_api_token,jira_server_URL, git_token, git_project):
-    if jira_api_token is None:
+    if jira_api_token is None or jira_user is None or jira_server_URL is None or git_token is None or git_project is None:
         exit(1)
     
     options = {
