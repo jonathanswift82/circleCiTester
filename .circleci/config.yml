@@ -28,7 +28,7 @@ jobs:
         github_project: $github_project      
       steps:
         - run:
-            ["sh", "-c", "env"]
+            sh -c env
             echo "test1"
             cd ~/project/.circleci/scripts/
             pip3 install PyGithub
