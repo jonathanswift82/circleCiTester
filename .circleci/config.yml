@@ -14,6 +14,7 @@ jobs:
         github_api_token: $github_api_token
         github_project: $github_project
       steps:
+        - checkout
         - run:
             sh -c env
             echo "test1"
