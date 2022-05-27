@@ -8,11 +8,11 @@ jobs:
             username: mydockerhub-user
             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       environment:
-        jira_user: ${jira_user}
-        jira_api_token: ${jira_api_token}
-        jira_server_url: ${jira_server_url}
-        github_api_token: ${github_api_token}
-        github_project: ${github_project}
+        jira_user: $jira_user
+        jira_api_token: $jira_api_token
+        jira_server_url: $jira_server_url
+        github_api_token: $github_api_token
+        github_project: $github_project
       steps:
         - run:
             sh -c env
