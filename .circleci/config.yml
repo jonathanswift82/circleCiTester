@@ -1,36 +1,31 @@
 version: 2.1
-​
 jobs:
-  update-jira-statuses:
+  build:
     docker:
-      - image: circleci/python:3.8.3
-    parameters:
-      jira_user:
-        type: string
-      jira_api_token:
-        type: string
-      jira_server_url:
-        type: string
-      github_api_token:
-        type: string
-      github_project:
-        type: string          
+      - image: cimg/python:3.10.4
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - run: echo << parameters.userProd >>
-          name:
-          command: |
+      - run: echo ${jira_user} ${jira_api_token} ${jira_server_url} ${github_api_token} ${github_project}
+  update-jira-statuses:
+      docker: 
+        - image: cimg/python:3.10.4
+          auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      steps:
+        - run: echo "test"
             cd ~/project/.circleci/scripts/
             pip3 install PyGithub
-            pip3 install PyGithub
-            pip3 install 
-            python3 jira_test.py $DD_API_KEY $DD_APPLICATION_KEY << parameters.dd-env >>
-​
+            pip3 install jira
+            pip3 install python-dotenv
+            python3 jira_test.py ${jira_user} ${jira_api_token} ${jira_server_url} ${github_api_token} ${github_project}
+
+
+# Orchestrate our job run sequence
 workflows:
-  my-workflow:
+  jira_status_update:
     jobs:
-      - update-jira-statuses:
-          jira_user: jonathanswift82@gmail.com
-          jira_api_token: 2R4
-          jira_server_url: https://jiracircleciintegration.atlassian.net
-          github_api_token: ghp_
-          github_project: circleCiTester
+      - build
+      - update-jira-statuses
