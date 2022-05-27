@@ -1,23 +1,9 @@
-import os
 import sys
-from pathlib import Path
-from dotenv import load_dotenv
 from jira import JIRA
 from github import Github
 
-
-env_path        = Path('.circleci\scripts\jira_test.env')
-load_dotenv(env_path)
-# load  api authenication data
-jira_user       = os.getenv('jira_user')
-jira_apikey     = os.getenv('jira_apikey')
-jira_server_URL = os.getenv('jira_server_URL')
-github_Token    = os.getenv('github_Token')
-github_project  = os.getenv('github_project')
-
 # pip install PyGithub
 # pip install jira
-# pip install python-dotenv
 
 def github_PRs(gitToken, gitproject):
     g       = Github( gitToken)
@@ -57,4 +43,3 @@ if __name__ == "__main__":
     for arg in args:
         print(arg)
     jira_change_status(args[1], args[2], args[3], args[4], args[5])
-
