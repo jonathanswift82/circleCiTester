@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 from dotenv import load_dotenv
 from jira import JIRA
@@ -17,28 +18,6 @@ github_project  = os.getenv('github_project')
 # pip install PyGithub
 # pip install jira
 # pip install python-dotenv
-
-##########################################################
-def set_environment_fields(monitor_json):
-  env = os.sys.argv[3]
-
-  # START - common errors 
-  if(len(env.split()) > 1):
-    print("ERROR: ENV needs to be one word, ideally kebab-case")
-    raise SystemError
-
-  # END - common errors
-  monitor_json['tags'] = monitor_json.get('tags', [])
-
-  monitor_json['name'] = monitor_json['name'].format(ENV = env)
-  monitor_json['tags'].append(f"env:sema4-lis-{env.lower()}")
-  monitor_json['tags'].append("team:echo")
-  monitor_json['message'] = monitor_json['message'].format(ENV = env.lower())
-
-  monitor_json['query'] = monitor_json['query'].format(ENV = env.lower())
-##########################################################
-
-
 
 def github_PRs(gitToken, gitproject):
     g       = Github( gitToken)
@@ -62,7 +41,7 @@ def jira_change_status(jira_user,jira_api_token,jira_server_URL, git_token, git_
     
     # loop through issues in Jira comparing them to Issues in Github
     for jira_issue in jira_issues:
-        #print(str(jira_issue).upper())
+        print(str(jira_issue).upper())
         for git_issue in github_issues:
             if str(jira_issue).upper() in git_issue.title.upper():
                 print('found')
@@ -71,4 +50,11 @@ def jira_change_status(jira_user,jira_api_token,jira_server_URL, git_token, git_
                 jira.add_comment(jira_issue, 'CircleCI Sevice: Changing Status to "DEVQA"')
                 exit()
 
-jira_change_status(jira_user, jira_apikey, jira_server_URL, github_Token, github_project)
+if __name__ == "__main__":
+    args = sys.argv
+    if(len(args) != 6):
+        exit(1)
+    for arg in args:
+        print(arg)
+    jira_change_status(args[1], args[2], args[3], args[4], args[5])
+

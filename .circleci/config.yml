@@ -1,6 +1,4 @@
 version: 2.1
-
-# Define the jobs we want to run for this project
 jobs:
   build:
     docker:
@@ -9,11 +7,25 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - run: echo $jira_user $jira_api_token $jira_server_url $github_api_token $github_project
+      - run: echo ${jira_user} ${jira_api_token} ${jira_server_url} ${github_api_token} ${github_project}
+  update-jira-statuses:
+      docker: 
+        - image: cimg/python:3.10.4
+          auth:
+            username: mydockerhub-user
+            password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      steps:
+        - run: echo "test"
+            cd ~/project/.circleci/scripts/
+            pip3 install PyGithub
+            pip3 install jira
+            pip3 install python-dotenv
+            python3 jira_test.py ${jira_user} ${jira_api_token} ${jira_server_url} ${github_api_token} ${github_project}
+
 
 # Orchestrate our job run sequence
 workflows:
-  build_and_test:
+  jira_status_update:
     jobs:
       - build
-          
+      - update-jira-statuses
