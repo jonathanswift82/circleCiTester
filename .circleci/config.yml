@@ -21,7 +21,6 @@ jobs:
       steps:
         - checkout
         - run:
-          name: testing
               echo ls
               cd ~/circleCiTester/.circleci/scripts/
               echo ls
