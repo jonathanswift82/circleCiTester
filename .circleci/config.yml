@@ -20,15 +20,10 @@ jobs:
         1github_project: ${github_project}
       parameters:
         2jira_user:
-          type: string
         2jira_api_token:
-          type: string
         2jira_server_url:
-          type: string
         2github_api_token:
-          type: string
         2github_project:
-          type: string
       steps:
         - checkout
         - run:
