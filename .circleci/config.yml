@@ -22,7 +22,7 @@ jobs:
         - checkout
         - run:
             sh -c env
-            echo "test1"
+            echo ls
             cd ~/circleCiTester/.circleci/scripts/
             echo ls
             pip install PyGithub
