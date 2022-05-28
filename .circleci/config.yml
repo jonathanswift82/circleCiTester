@@ -21,8 +21,6 @@ jobs:
       steps:
         - checkout
         - run:
-            name: jira update
-            |
               echo ls
               cd ~/circleCiTester/.circleci/scripts/
               echo ls
@@ -31,6 +29,6 @@ jobs:
 
 # Orchestrate our job run sequence
 workflows:
-  jira_status_update:
+  &jira_status_update:
     jobs:
       - update-jira-statuses
