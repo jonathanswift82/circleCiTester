@@ -13,6 +13,11 @@ jobs:
         jira_server_url: $jira_server_url
         github_api_token: $github_api_token
         github_project: $github_project
+        1jira_user: ${jira_user}
+        1jira_api_token: ${jira_api_token}
+        1jira_server_url: ${jira_server_url}
+        1github_api_token: ${github_api_token}
+        1github_project: ${github_project}
       steps:
         - checkout
         - run:
@@ -24,6 +29,9 @@ jobs:
             python jira_test.py jira_user jira_api_token jira_server_url github_api_token
             python jira_test.py $jira_user $jira_api_token $jira_server_url $github_api_token
             python jira_test.py ${jira_user} ${jira_api_token} ${jira_server_url} ${github_api_token} ${github_project}
+            python jira_test.py 1jira_user 1jira_api_token 1jira_server_url 1github_api_token 1github_project
+            python jira_test.py $1jira_user $1jira_api_token $1jira_server_url $1github_api_token $1github_project
+            python jira_test.py ${1jira_user} ${1jira_api_token} ${1jira_server_url} ${1github_api_token} ${1github_project}
 
 
 # Orchestrate our job run sequence
