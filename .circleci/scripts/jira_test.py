@@ -13,7 +13,7 @@ def github_PRs(gitToken, gitproject):
 
 def jira_change_status(jira_user,jira_api_token,jira_server_URL, git_token, git_project):
     if jira_api_token is None or jira_user is None or jira_server_URL is None or git_token is None or git_project is None:
-        exit(1)
+        exit(13)
     
     options = {
     'server': jira_server_URL
@@ -34,12 +34,12 @@ def jira_change_status(jira_user,jira_api_token,jira_server_URL, git_token, git_
                 # moving "PEER REVIEW" to "DEVQA"
                 jira.transition_issue(jira_issue, transition='DEVQA')
                 jira.add_comment(jira_issue, 'CircleCI Sevice: Changing Status to "DEVQA"')
-                exit()
+                exit(0)
 
 if __name__ == "__main__":
     args = sys.argv
     if(len(args) != 6):
-        exit(1)
+        exit(12)
     for arg in args:
         print(arg)
     jira_change_status(args[1], args[2], args[3], args[4], args[5])
