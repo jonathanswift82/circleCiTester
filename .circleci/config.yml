@@ -45,8 +45,8 @@ workflows:
   jira_status_update:
     jobs:
       - update-jira-statuses:
-          2jira_user: $jira_user
-          2jira_api_token: $jira_api_token
-          2jira_server_url: $jira_server_url
-          2github_api_token: $github_api_token
-          2github_project: $github_project
+          2jira_user: ${jira_user}
+          2jira_api_token: ${jira_api_token}
+          2jira_server_url: ${jira_server_url}
+          2github_api_token: ${github_api_token}
+          2github_project: ${github_project}
