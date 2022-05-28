@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   build:
-  update-jira-statuses:
+  &update-jira-statuses:
       docker: 
         - image: cimg/python:3.10.4
           auth:
@@ -21,9 +21,11 @@ jobs:
       steps:
         - checkout
         - run:
-            echo ls
-            cd ~/circleCiTester/.circleci/scripts/
-            echo ls
+            name: jira update
+            |
+              echo ls
+              cd ~/circleCiTester/.circleci/scripts/
+              echo ls
 
 
 
