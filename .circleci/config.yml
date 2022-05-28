@@ -21,9 +21,11 @@ jobs:
       steps:
         - checkout
         - run:
-            echo ls
-            cd ~/circleCiTester/.circleci/scripts/
-            echo ls
+            name: jira update
+            |
+              echo ls
+              cd ~/circleCiTester/.circleci/scripts/
+              echo ls
 
 
 
