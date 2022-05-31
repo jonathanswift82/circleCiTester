@@ -18,16 +18,12 @@ jobs:
         1jira_server_url: ${jira_server_url}
         1github_api_token: ${github_api_token}
         1github_project: ${github_project}
-      parameters:
-        2jira_user:
-        2jira_api_token:
-        2jira_server_url:
-        2github_api_token:
-        2github_project:
       steps:
         - checkout
         - run:
-            echo ls
+            echo $jira_user
+            echo ${jira_user}
+            echo 2jira_user
             cd ~/circleCiTester/.circleci/scripts/
             echo ls
             pip install PyGithub
@@ -47,8 +43,3 @@ workflows:
   jira_status_update:
     jobs:
       - update-jira-statuses:
-          2jira_user: ${jira_user}
-          2jira_api_token: ${jira_api_token}
-          2jira_server_url: ${jira_server_url}
-          2github_api_token: ${github_api_token}
-          2github_project: ${github_project}
