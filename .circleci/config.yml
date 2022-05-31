@@ -42,4 +42,4 @@ jobs:
 workflows:
   jira_status_update:
     jobs:
-      - update-jira-statuses:
+      - update-jira-statuses
