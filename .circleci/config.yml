@@ -10,7 +10,6 @@ jobs:
       steps:
         - checkout
         - run:
-            cd ~/circleCiTester/.circleci/scripts/
             echo $jira_user
 
 
