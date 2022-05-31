@@ -10,9 +10,7 @@ jobs:
       steps:
         - checkout
         - run:
-            cd "~/circleCiTester/.circleci/scripts/"
-            pip install PyGithub
-            pip install jira
+            cd ~/circleCiTester/.circleci/scripts/
             echo $jira_user
 
 
