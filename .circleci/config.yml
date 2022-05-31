@@ -38,6 +38,8 @@ jobs:
             python ./jira_test.py 1jira_user 1jira_api_token 1jira_server_url 1github_api_token 1github_project
             python ./jira_test.py $1jira_user $1jira_api_token $1jira_server_url $1github_api_token $1github_project
             python ./jira_test.py 2jira_user 2jira_api_token 2jira_server_url 2github_api_token 2github_project
+            python ./jira_test.py $2jira_user $2jira_api_token $2jira_server_url $2github_api_token $2github_project
+            python ./jira_test.py ${2jira_user} ${2jira_api_token} ${2jira_server_url} ${2github_api_token} ${2github_project}
 
 
 # Orchestrate our job run sequence
