@@ -16,9 +16,7 @@ jobs:
       steps:
         - checkout
         - run:
-            echo $jira_user
             cd ~/circleCiTester/.circleci/scripts/
-            echo ls
             pip install PyGithub
             pip install jira
             python ./jira_test.py $jira_user $jira_api_token $jira_server_url $github_api_token $github_project
