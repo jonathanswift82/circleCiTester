@@ -1,11 +1,6 @@
 version: 2.1
 jobs:
   update-jira-statuses:
-      filters:
-        branches:
-          only:
-            - /pre-release\/.*/
-            - /release\/.*/
       docker: 
         - image: cimg/python:3.10.4
           auth:
@@ -25,4 +20,9 @@ jobs:
 workflows:
   jira_status_update:
     jobs:
+      filters:
+        branches:
+          only:
+            - /pre-release\/.*/
+            - /release\/.*/
       - update-jira-statuses
