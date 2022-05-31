@@ -20,9 +20,9 @@ jobs:
 workflows:
   jira_status_update:
     jobs:
-      filters:
-        branches:
-          only:
-            - /pre-release\/.*/
-            - /release\/.*/
-      - update-jira-statuses
+      - update-jira-statuses:
+        filters:
+          branches:
+            only:
+              - /pre-release\/.*/
+              - /release\/.*/
