@@ -8,6 +8,7 @@ jobs:
             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       steps:
         - checkout
+          path: $github_project
         - run:
             echo $jira_user
 
