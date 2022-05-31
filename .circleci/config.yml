@@ -10,6 +10,7 @@ jobs:
         - checkout
         - run:
             cd ~/project/.circleci/scripts/
+        - run:    
             pip install PyGithub
         - run:    
             pip install jira
