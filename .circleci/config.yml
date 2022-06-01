@@ -16,9 +16,14 @@ jobs:
               pip install jira 
               python jira_test.py $jira_user $jira_api_token $jira_server_url $github_api_token $github_project
 
-
 # Orchestrate our job run sequence
 workflows:
   jira_status_update:
     jobs:
-      - update-jira-statuses
+      - update-jira-statuses:
+        filters:
+          branches:
+            only:
+              - TES-1
+              - /pre-release\/.*/
+              - /release\/.*/
