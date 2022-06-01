@@ -27,7 +27,7 @@ def jira_change_status(jira_user,jira_api_token,jira_server_URL, git_token, git_
     
     # loop through issues in Jira comparing them to Issues in Github
     for jira_issue in jira_issues:
-        print(str(jira_issue).upper())
+        print('jira: ',str(jira_issue).upper())
         for git_issue in github_issues:
             if str(jira_issue).upper() in git_issue.title.upper():
                 print('found')
