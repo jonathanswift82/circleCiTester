@@ -24,6 +24,6 @@ workflows:
         filters:
           branches:
             only:
-              - TES-1
-              - /pre-release\/.*/
+              - TES-\d
+              - /pre-release\/.*
               - /release\/.*/
