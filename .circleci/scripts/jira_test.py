@@ -20,7 +20,7 @@ def jira_change_status(jira_user,jira_api_token,jira_server_URL, git_token, git_
     }
 
     jira = JIRA(options, basic_auth=(jira_user,jira_api_token) )
-    # query uses JQL
+    #query uses JQL
     #jira_issues     = jira.search_issues('project = "L Plus Workbench" AND status IN ("PEER REVIEW") ORDER BY issuekey')
     jira_issues    = jira.search_issues('project = "testingTeam" AND status IN ("PEER REVIEW") ORDER BY issuekey')
     github_issues  = github_PRs(git_token, git_project)
@@ -42,4 +42,4 @@ if __name__ == "__main__":
         exit(12)
     for arg in args:
         print(arg)
-    jira_change_status(args[1], args[2], args[3], args[4], args[5])
+    jira_change_status(args[1], args[2], args[3], args[4], args[5])  
