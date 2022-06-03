@@ -25,17 +25,17 @@ def jira_change_status(jira_user,jira_api_token, jira_project_name, jira_server_
     # loop through issues in Jira comparing them to Issues in Github
     found = FALSE
     for jira_issue in jira_issues:
-        print('jira: ',str(jira_issue).upper())
+        #print('jira: ',str(jira_issue).upper())
         for git_issue in github_issues:
             if str(jira_issue).upper() in git_issue.title.upper():
-                print('found match: ' + str(jira_issue).upper() +' status:'+str(jira_issue.fields.assignee))
+                #print('found match: ' + str(jira_issue).upper() +' status:'+str(jira_issue.fields.assignee))
                 found = TRUE
                 # moving "PEER REVIEW" to "DEVQA"
                 jira.transition_issue(jira_issue, transition='DEVQA')
-                jira.add_comment(jira_issue, 'CircleCI Sevice: Changing Status to "DEVQA"'+git_issue.comments_url)
+                jira.add_comment(jira_issue, 'CircleCI Sevice: Changing Status to "DEVQA"'+git_issue.labels_url)
 
     if found == FALSE:
-        print('No Matches Found')
+        #print('No Matches Found')
 
 
 if __name__ == "__main__":
