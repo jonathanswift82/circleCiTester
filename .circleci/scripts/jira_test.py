@@ -1,3 +1,4 @@
+from pickle import FALSE, TRUE
 import sys
 from jira import JIRA
 from github import Github
@@ -18,20 +19,24 @@ def jira_change_status(jira_user,jira_api_token, jira_project_name, jira_server_
 
     jira = JIRA(options, basic_auth=(jira_user,jira_api_token) )
     #query uses JQL
-    #jira_issues     = jira.search_issues('project = "L Plus Workbench" AND status IN ("PEER REVIEW") ORDER BY issuekey')
-    jira_issues    = jira.search_issues('project = '+jira_project_name+' AND status IN ("PEER REVIEW") ORDER BY issuekey')
+    jira_issues    = jira.search_issues('project = \"'+jira_project_name+'\" AND status IN (\'PEER REVIEW\') ORDER BY issuekey')
     github_issues  = github_PRs(git_token, git_project)
     
     # loop through issues in Jira comparing them to Issues in Github
+    found = FALSE
     for jira_issue in jira_issues:
         print('jira: ',str(jira_issue).upper())
         for git_issue in github_issues:
             if str(jira_issue).upper() in git_issue.title.upper():
-                print('found match')
+                print('found match: ' + str(jira_issue).upper() +' status:'+str(jira_issue.fields.assignee))
+                found = TRUE
                 # moving "PEER REVIEW" to "DEVQA"
                 jira.transition_issue(jira_issue, transition='DEVQA')
-                jira.add_comment(jira_issue, 'CircleCI Sevice: Changing Status to "DEVQA"')
-                exit(0)
+                jira.add_comment(jira_issue, 'CircleCI Sevice: Changing Status to "DEVQA"'+git_issue.comments_url)
+
+    if found == FALSE:
+        print('No Matches Found')
+
 
 if __name__ == "__main__":
     args = sys.argv
@@ -39,4 +44,4 @@ if __name__ == "__main__":
         exit(12)
     for arg in args:
         print(arg)
-    jira_change_status(args[1], args[2], args[3], args[4], args[5], args[6])  
+    jira_change_status(args[1], args[2], args[3], args[4], args[5], args[6])
