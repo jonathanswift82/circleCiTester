@@ -32,7 +32,7 @@ def jira_change_status(jira_user,jira_api_token, jira_project_name, jira_server_
                 found = TRUE
                 # moving "PEER REVIEW" to "DEVQA"
                 jira.transition_issue(jira_issue, transition='DEVQA')
-                jira.add_comment(jira_issue, 'CircleCI Sevice: Changing Status to "DEVQA"'+git_issue.labels_url)
+                jira.add_comment(jira_issue, 'CircleCI Sevice: Changing Status to "DEVQA". PR :'+git_issue.pull_request)
 
 
 if __name__ == "__main__":
