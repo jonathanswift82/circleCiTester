@@ -19,7 +19,7 @@ def jira_change_status(jira_user,jira_api_token, jira_project_name, jira_server_
 
     jira = JIRA(options, basic_auth=(jira_user,jira_api_token) )
     #query uses JQL
-    jira_issues    = jira.search_issues('project = \"'+jira_project_name+'\" AND status IN (\'PEER REVIEW\') ORDER BY issuekey')
+    jira_issues    = jira.search_issues('project = \"'+jira_project_name+'\" AND status IN (\'PEER REVIEW\') ORDER BY issuekey') 
     github_issues  = github_PRs(git_token, git_project)
     
     # loop through issues in Jira comparing them to Issues in Github
