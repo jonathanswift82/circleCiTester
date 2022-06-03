@@ -34,7 +34,7 @@ def jira_change_status(jira_user,jira_api_token, jira_project_name, jira_server_
                 jira.transition_issue(jira_issue, transition='DEVQA')
                 jira.add_comment(jira_issue, 'CircleCI Sevice: Changing Status to "DEVQA"'+git_issue.labels_url)
 
-    if found == FALSE:
+    #if found == FALSE:
         #print('No Matches Found')
 
 
